@@ -49,11 +49,11 @@
   <script type="systemjs-importmap">
     {
       "imports": {
-        "@demo/root-config": "//localhost:9000/demo-root-config.js",
-        "@demo/app1": "//localhost:8080/demo-app1.js",
-        "@demo/app2": "//localhost:8081/demo-app2.js",
-        "@demo/helpers": "//localhost:8083/demo-helpers.js",
-        "@demo/components": "//localhost:8082/demo-components.js"
+        "@demo/root-config": "<%= process.env.ROOT_CONFIG_WEB_URL %>/demo-root-config.js",
+        "@demo/app1": "<%= process.env.APP_1_WEB_URL %>/demo-app1.js",
+        "@demo/app2": "<%= process.env.APP_2_WEB_URL %>1/demo-app2.js",
+        "@demo/helpers": "<%= process.env.HELPERS_WEB_URL %>/demo-helpers.js",
+        "@demo/components": "<%= process.env.COMPONENTS_WEB_URL %>/demo-components.js"
       }
     }
   </script>

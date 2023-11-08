@@ -2,6 +2,8 @@ const { merge } = require("webpack-merge");
 const singleSpaDefaults = require("webpack-config-single-spa-ts");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+const Dotenv = require("dotenv-webpack");
+
 module.exports = (webpackConfigEnv, argv) => {
   const orgName = "demo";
   const defaultConfig = singleSpaDefaults({
@@ -12,7 +14,7 @@ module.exports = (webpackConfigEnv, argv) => {
     disableHtmlGeneration: true,
   });
 
-  return merge(defaultConfig, {
+  const customWebpackConfig = {
     // modify the webpack config however you'd like to by adding to this object
     plugins: [
       new HtmlWebpackPlugin({
@@ -21,8 +23,27 @@ module.exports = (webpackConfigEnv, argv) => {
         templateParameters: {
           isLocal: webpackConfigEnv && webpackConfigEnv.isLocal,
           orgName,
+          process
         },
       }),
     ],
-  });
+    devServer: {
+      port: process.env.ROOT_CONFIG_DEV_PORT,
+    },
+  }
+
+
+
+  // we need to use dotenv only in development mode
+  // for production mode, env variables will be from pipeline
+  if (process.env.isLocal === "true") {
+    customWebpackConfig.plugins.push(
+      new Dotenv({
+        path: "../../.env",
+        expand: true,
+      }),
+    );
+  }
+
+  return merge(defaultConfig, customWebpackConfig);
 };
