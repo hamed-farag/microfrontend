@@ -1,0 +1,33 @@
+{
+  "name": "@demo/micro",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:root": "lerna run start --scope=@demo/root-config",
+    "build:root": "lerna run build --scope=@demo/root-config",
+    "start:app1": "lerna run start --scope=@demo/app1",
+    "build:app1": "lerna run build --scope=@demo/app1",
+    "start:app2": "lerna run start --scope=@demo/app2",
+    "build:app2": "lerna run build --scope=@demo/app2",
+    "start:helpers": "lerna run start --scope=@demo/helpers",
+    "build:helpers": "lerna run build --scope=@demo/helpers",
+    "start:components": "lerna run start --scope=@demo/components",
+    "build:components": "lerna run build --scope=@demo/components",
+    "build:all": "run-p build:root build:app1 build:app2 build:helpers build:components",
+    "start": "run-p start:root start:app1 start:app2 start:helpers start:components",
+    "preinstall": "npx only-allow pnpm"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "npm": "please-use-pnpm",
+    "node": ">=18.0.0",
+    "pnpm": ">= 8.0.0"
+  },
+  "devDependencies": {
+    "lerna": "^7.4.2",
+    "npm-run-all": "^4.1.5"
+  }
+}
